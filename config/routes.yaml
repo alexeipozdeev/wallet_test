@@ -1,0 +1,20 @@
+wallet_balance:
+    path: '/wallet/{id}/balance'
+    controller: 'walletApp.controller.WalletController::get'
+    methods: [GET]
+    requirements:
+        id: '\d+'
+
+wallet_balance_change:
+    path: '/wallet/{id}/balance'
+    controller: 'walletApp.controller.WalletController::change'
+    methods: [PATCH]
+    requirements:
+        id: '\d+'
+
+wallet_total_sum_by_number_days:
+    path: '/wallet/{id}/total'
+    controller: 'walletApp.controller.WalletController::'
+    methods: [PATCH]
+    requirements:
+        id: '\d+'

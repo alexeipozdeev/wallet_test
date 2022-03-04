@@ -1,0 +1,9 @@
+parameters:
+    app_root_dir: '/app'
+    server_name: 'wallet.loc'
+
+    #Parameters for connection to DB
+    db_wallet_server: ''
+    db_wallet_dbname: ''
+    db_wallet_username: ''
+    db_wallet_password: ''

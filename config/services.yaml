@@ -1,0 +1,55 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: false     # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    WalletApp\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    walletApp.repository.WalletRepository:
+        class: WalletApp\Repository\Wallet\WalletRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    walletApp.repository.CurrencyRateRepository:
+        class: WalletApp\Repository\CurrencyRate\CurrencyRateRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    walletApp.repository.WalletHistoryRepository:
+        class: WalletApp\Repository\WalletHistory\WalletHistoryRepository
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    walletApp.service.CurrencyRateService:
+        class: WalletApp\Service\CurrencyRate\CurrencyRateService
+        arguments:
+            - '@walletApp.repository.CurrencyRateRepository'
+
+    walletApp.service.WalletHistoryService:
+        class: WalletApp\Service\WalletHistory\WalletHistoryService
+        arguments:
+            - '@walletApp.repository.WalletHistoryRepository'
+
+    walletApp.controller.WalletController:
+        class: WalletApp\Controller\WalletController
+        arguments:
+            - '@validator'
+            - '@walletApp.repository.WalletRepository'
+            - '@walletApp.repository.WalletHistoryRepository'
+            - '@walletApp.service.WalletHistoryService'
+            - '@walletApp.service.CurrencyRateService'
+        tags: ['controller.service_arguments']
