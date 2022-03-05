@@ -53,6 +53,11 @@ Note. Should be created "wallet_db" database
 ```
 bin/console doctrine:migrations:migrate
 ```
+After that we have three tables: "wallet", wallet_history", "currency_rate" \
+And two wallet:
+- id: 1, currency: RUB, balance: 0, client_id: 111
+- id: 2, currency: USD, balance: 0, client_id: 222
+
 11. Add to the "hosts" file (of Window). It is necessary for access to app via web
 ```
 C:\Windows\System32\drivers\etc
