@@ -1,4 +1,4 @@
-version: '3'
+version: '3.0'
 
 services:
   app:
@@ -8,7 +8,6 @@ services:
       - .env.local
     environment:
       - VIRTUAL_HOST=wallet.loc
-      - PHP_IDE_SERVER_NAME=wallet.loc
     volumes:
       - .:/app
       - .env.local:/app/.env
